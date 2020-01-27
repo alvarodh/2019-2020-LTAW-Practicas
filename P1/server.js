@@ -10,12 +10,9 @@ const fs = require('fs');
 console.log('Arrancando servidor...')
 
 // Funcion para atender peticiones
-// req → solicitud
-// res → respuesta
+//    req → solicitud
+//    res → respuesta
 function peticion(req, res) {
-
-  // Peticion recibida
-  console.log('Peticion recibida!')
 
   // Buscamos en la url el recurso que se pide
   var url = req.url.slice(1).split('.')[0];
@@ -61,4 +58,4 @@ const server = http.createServer(peticion)
 server.listen(port);
 
 console.log('Super-Servidor LISTO!')
-console.log('Escuchando en puerto: ' + port)
+console.log('Escuchando en puerto: ' + port + '\n\n')
