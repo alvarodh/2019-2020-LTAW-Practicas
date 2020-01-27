@@ -1,18 +1,16 @@
 // Puerto para recibir las peticiones
 const port = 8080;
-
-// Modulo http
 const http = require('http');
-
-// Modulo para la obtencion de los recursos que pide el cliente
 const fs = require('fs');
 
 console.log('Arrancando servidor...')
 
-// Funcion para atender peticiones
-//    req → solicitud
-//    res → respuesta
-function peticion(req, res) {
+// Inicializar el servidor
+// Cada vez que recibe una petición, la atiende
+const server = http.createServer(function (req, res) {
+  // Funcion para atender peticiones
+  //    req → solicitud
+  //    res → respuesta
 
   // Buscamos en la url el recurso que se pide
   var url = req.url.slice(1).split('.')[0];
@@ -48,14 +46,7 @@ function peticion(req, res) {
         return res.end();
       });
   }
-}
-
-// Inicializar el servidor
-// Cada vez que recibe una petición, la atiende
-const server = http.createServer(peticion)
-
-// Configurar el servidor para escuchar en el puerto establecido
-server.listen(port);
+}).listen(port);
 
 console.log('Super-Servidor LISTO!')
 console.log('Escuchando en puerto: ' + port + '\n\n')
