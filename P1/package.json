@@ -16,7 +16,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "node hello.js",
-    "version": "node -v"
+    "test": "node -v"
   }
 }
