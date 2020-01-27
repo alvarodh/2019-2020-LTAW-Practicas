@@ -18,6 +18,7 @@ const server = http.createServer(function (req, res) {
   // Miramos si tenemos ese recurso
   switch (url) {
     case '':
+    case 'index':
       // Si no hay nada redirigimos a la pagina inicial
       fs.readFile('layout/index.html', 'utf-8', (err, data) => {
         res.writeHead(200, {'Content-Type': 'text/html'});
