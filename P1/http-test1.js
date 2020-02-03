@@ -28,6 +28,21 @@ const http = require('http'),
                     mime:'text/html'
                   },
                   {
+                    url:'/recurso4',
+                    pathname:'layout/recurso4.html',
+                    mime:'text/html'
+                  },
+                  {
+                    url:'/recurso5',
+                    pathname:'layout/recurso5.html',
+                    mime:'text/html'
+                  },
+                  {
+                    url:'/recurso6',
+                    pathname:'layout/recurso6.html',
+                    mime:'text/html'
+                  },
+                  {
                     url:'/imagen',
                     pathname:'static/image/index.jpg',
                     mime:'image/jpg'
@@ -45,6 +60,26 @@ const http = require('http'),
                   {
                     url:'/imagen3',
                     pathname:'static/image/recurso3.jpg',
+                    mime:'image/jpg'
+                  },
+                  {
+                    url:'/imagen4',
+                    pathname:'static/image/recurso4.jpg',
+                    mime:'image/jpg'
+                  },
+                  {
+                    url:'/imagen4',
+                    pathname:'static/image/recurso5.jpg',
+                    mime:'image/jpg'
+                  },
+                  {
+                    url:'/imagen5',
+                    pathname:'static/image/recurso5.jpg',
+                    mime:'image/jpg'
+                  },
+                  {
+                    url:'/imagen6',
+                    pathname:'static/image/recurso6.jpg',
                     mime:'image/jpg'
                   },
                   {
@@ -66,6 +101,26 @@ const http = require('http'),
                     url:'/style3',
                     pathname:'static/css/recurso3.css',
                     mime:'text/css'
+                  },
+                  {
+                    url:'/style4',
+                    pathname:'static/css/recurso4.css',
+                    mime:'text/css'
+                  },
+                  {
+                    url:'/style5',
+                    pathname:'static/css/recurso5.css',
+                    mime:'text/css'
+                  },
+                  {
+                    url:'/style6',
+                    pathname:'static/css/recurso6.css',
+                    mime:'text/css'
+                  },
+                  {
+                    url:'/mainjs',
+                    pathname:'static/js/main.js',
+                    mime:'text/javascript'
                   }
                 ];
 
@@ -82,12 +137,8 @@ server = http.createServer((req,res) => {
       code = 200;
       path = recursos[i].pathname;
       mime = recursos[i].mime;
-      console.log('200 OK');
       break;
     }
-  }
-  if (i > recursos.length){
-    console.log('404 file not found');
   }
   fs.readFile(path,(err,data) => {
     if (err){
@@ -100,4 +151,4 @@ server = http.createServer((req,res) => {
 }).listen(port);
 
 console.log('Port: ' + port);
-console.log('Index URL: http://localhost:' + port + '/')
+console.log('Index URL: http://localhost:' + port + '/\n\n')
