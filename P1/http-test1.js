@@ -28,6 +28,11 @@ const http = require('http'),
                     mime:'text/html'
                   },
                   {
+                    url:'/imagen',
+                    pathname:'static/image/index.jpg',
+                    mime:'image/jpg'
+                  },
+                  {
                     url:'/imagen1',
                     pathname:'static/image/recurso1.jpg',
                     mime:'image/jpg'
@@ -66,30 +71,33 @@ const http = require('http'),
 
 console.log('Starting server...');
 
-server = http.createServer((req, res) => {
-  var url = req.url;
+server = http.createServer((req,res) => {
+  var url = req.url,
+      code = 404,
+      path = 'layout/error.html',
+      mime = 'text/html';
   console.log('required: ' + url)
   for (var i = 0; i < recursos.length; i++) {
     if (url == recursos[i].url){
+      code = 200;
+      path = recursos[i].pathname;
+      mime = recursos[i].mime;
+      console.log('200 OK');
       break;
     }
   }
-  if (i < recursos.length){
-    console.log('200 OK')
-    fs.readFile(recursos[i].pathname,(err,data) => {
-      res.writeHead(200, {'Content-Type':recursos[i].mime});
-      res.write(data);
-      return res.end();
-    });
-  } else {
-    console.log('404 file not found')
-    fs.readFile('layout/error.html','utf-8',(err,data) => {
-      res.writeHead(404, {'Content-Type':'text/html'});
-      res.write(data);
-      return res.end();
-    });
+  if (i > recursos.length){
+    console.log('404 file not found');
   }
+  fs.readFile(path,(err,data) => {
+    if (err){
+      return res.end('SUPER-ERROR: file not found');
+    }
+    res.writeHead(code,{'Content-Type':mime});
+    res.write(data);
+    return res.end();
+  });
 }).listen(port);
 
 console.log('Port: ' + port);
-console.log('Index URL: http://localhost:8080/')
+console.log('Index URL: http://localhost:' + port + '/')

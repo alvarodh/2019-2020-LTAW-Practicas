@@ -1,13 +1,13 @@
 {
   "name": "Super-Server",
-  "description": "Super-Servidor web hola mundo",
+  "description": "Super-Servidor web para Super-Tienda web",
   "keywords": [
     "ltaw",
     "test"
   ],
   "version": "0.0.1",
   "author": "Álvaro del Hoyo Arias (Pollo)",
-  "main": "server.js",
+  "main": "http-test1.js",
   "devDependencies": {},
   "license": "GPL-3.0",
   "repository": {
@@ -15,7 +15,7 @@
     "url": "https://github.com/alvarodh/2019-2020-LTAW-Practicas.git"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node http-test1.js",
     "test": "node -v"
   }
 }
