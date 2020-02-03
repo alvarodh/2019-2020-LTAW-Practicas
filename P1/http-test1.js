@@ -43,6 +43,11 @@ const http = require('http'),
                     mime:'image/jpg'
                   },
                   {
+                    url:'/style',
+                    pathname:'static/css/index.css',
+                    mime:'text/css'
+                  },
+                  {
                     url:'/style1',
                     pathname:'static/css/recurso1.css',
                     mime:'text/css'
