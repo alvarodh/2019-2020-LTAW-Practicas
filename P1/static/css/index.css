@@ -1,5 +1,10 @@
-h1 {
+#header {
   color: orange;
+  font-size: 50px;
+}
+
+.img-header {
+  width: 150px;
 }
 
 img {
@@ -12,4 +17,5 @@ img {
 
 body {
   background-color: green;
+  text-align: center;
 }

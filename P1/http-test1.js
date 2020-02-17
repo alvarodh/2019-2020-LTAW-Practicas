@@ -14,23 +14,27 @@ http.createServer((req, res) => {
   if (q.pathname == '/') {
     filename = 'layout/index.html'
   } else {
-    console.log(q.pathname)
     filename = q.pathname.substr(1);
   }
   let extension = filename.split('.')[1],
+      code = 200,
       mime = 'text/html';
   console.log('required: ' + filename)
   switch (extension) {
     case 'png':
     case 'jpg':
+    case 'ico':
       mime = 'image/' + extension;
       break;
     case 'css':
     case 'html':
       mime = 'text/' + extension;
       break;
+    case 'json':
+      mime = 'application/' + extension;
+      break;
     default:
-      mime = 'text/html';
+      code = 404;
       filename = 'layout/error.html';
   }
   fs.readFile(filename, (err, data) => {
@@ -38,7 +42,7 @@ http.createServer((req, res) => {
       res.writeHead(404, {'Content-Type': 'text/html'})
       return res.end('SUPER-ERROR: file not found');
     }
-    res.writeHead(200, {'Content-Type': mime});
+    res.writeHead(code, {'Content-Type': mime});
     res.write(data);
     return res.end();
   });
