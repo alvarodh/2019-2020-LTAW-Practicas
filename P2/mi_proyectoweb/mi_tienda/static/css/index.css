@@ -1,0 +1,21 @@
+#header {
+  color: orange;
+  font-size: 50px;
+}
+
+.img-header {
+  width: 150px;
+}
+
+img {
+  width: 25%;
+}
+
+#recurso {
+  width: 200px;
+}
+
+body {
+  background-color: green;
+  text-align: center;
+}
