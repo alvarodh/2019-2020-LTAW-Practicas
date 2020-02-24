@@ -9,10 +9,10 @@ def index(request):
     return render(request, 'index.html', {'numero1': str(randint(0, 100)), 'numero2': str(randint(0, 100))})
 
 def producto1(request):
-    return render(request, 'producto1.html', {'numero': str(randint(0, 100))})
+    return render(request, 'producto1.html')
 
 def producto2(request):
-    return render(request, 'producto2.html', {'numero': str(randint(0, 100))})
+    return render(request, 'producto2.html')
 
 def producto3(request):
-    return render(request, 'producto3.html', {'numero': str(randint(0, 100))})
+    return render(request, 'producto3.html')
