@@ -7,15 +7,16 @@
   width: 150px;
 }
 
-img {
-  width: 25%;
-}
-
 #recurso {
-  width: 200px;
+  width: 50%;
 }
 
 body {
   background-color: green;
   text-align: center;
+}
+
+img {
+  width: 50%;
+  border: 1px solid black;
 }

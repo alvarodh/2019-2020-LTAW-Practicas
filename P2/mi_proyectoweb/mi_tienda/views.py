@@ -7,25 +7,22 @@ from random import randint
 from mi_tienda.models import Producto
 
 def index(request):
-    return render(request, 'index.html', {'numero1': str(randint(0, 100)), 'numero2': str(randint(0, 100))})
+    return render(request, 'index.html', {'productos': Producto.objects.all()})
 
-def producto1(request):
-    return render(request, 'producto1.html')
+def croissant_mantequilla(request):
+    return render(request, 'croissant-mantequilla.html',{})
 
-def producto2(request):
-    return render(request, 'producto2.html')
+def donut_azucar(request):
+    return render(request, 'donut-azucar.html',{})
 
-def producto3(request):
-    return render(request, 'producto3.html')
+def donut_chocolate(request):
+    return render(request, 'donut-chocolate.html',{})
 
-def list(request):
-    productos = Producto.objects.all()
-    html = "<h2>Listado de articulos</h2>"
-    for prod in productos:
-        print(prod.nombre)
-        html += '<p>'+ prod.nombre + ' ' + str(prod.precio) + '<p>'
-    return HttpResponse(html)
+def napolitana_3_chocolates(request):
+    return render(request, 'napolitana-3-chocolates.html',{})
 
-def list2(request):
-    productos = Producto.objects.all()
-    return render(request, 'listado.html', {'productos':productos})
+def palmera_hojaldre(request):
+    return render(request, 'palmera-hojaldre.html',{})
+
+def palmera_chocolate(request):
+    return render(request, 'palmera-chocolate.html',{})

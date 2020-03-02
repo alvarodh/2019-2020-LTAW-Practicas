@@ -19,12 +19,6 @@
         <span id="header">Súper-Tienda</span>
       </a>
     </nav>
-    {% for prod in productos %}
-        <div style="width:50%;float:{% cycle 'left' 'right' %};text-align:center;">
-          <strong>{{ prod.name }}</strong> → Precio: {{ prod.price }} €/unidad
-          <br>
-          <a href="{{ prod.prodpath }}"><img src="{% static prod.imgpath %}" alt="Imagen"></a>
-        </div>
-    {% endfor %}
+    <img src="{% static 'image/donuts-azucar.jpg' %}" alt="">
   </body>
 </html>

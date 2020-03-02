@@ -5,9 +5,10 @@ from . import views
 urlpatterns = [
     # -- Vista pricipal (índice)
     path('', views.index, name='index'),
-    path('producto1/', views.producto1, name='producto1'),
-    path('producto2/', views.producto2, name='producto2'),
-    path('producto3/', views.producto3, name='producto3'),
-    path('list/', views.list, name='list'),
-    path('list2/', views.list2, name='list2'),
+    path('croissant-mantequilla.html', views.croissant_mantequilla, name='croissant_mantequilla'),
+    path('donut-azucar.html', views.donut_azucar, name='donut_azucar'),
+    path('donut-chocolate.html', views.donut_chocolate, name='donut_chocolate'),
+    path('napolitana-3-chocolates.html', views.napolitana_3_chocolates, name='napolitana_3_chocolates'),
+    path('palmera-hojaldre.html', views.palmera_hojaldre, name='palmera_hojaldre'),
+    path('palmera-chocolate.html', views.palmera_chocolate, name='palmera_chocolate'),
 ]
