@@ -10,13 +10,13 @@ class Producto(models.Model):
     prodpath = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return self.prodpath
 
 class Pedido(models.Model):
     """Modelo de datos de mis productos"""
 
-    nombre = models.CharField(max_length=50)
-    producto = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    cart = models.CharField(max_length=250,default="[]")
 
     def __str__(self):
-        return self.nombre + ": " + self.producto
+        return self.name

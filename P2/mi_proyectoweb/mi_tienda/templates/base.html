@@ -17,7 +17,10 @@
         <img class="img-header" src="{% static 'image/index.jpg' %}" alt="Imagen navbar">
         <span id="header">Súper-Tienda</span>
       </a>
-      <a href="pedido"> Hacer pedido </a>
+      <a class="navbar-brand"href="product-add"> Hacer pedido </a>
+      <a class="navbar-brand"href="show-cart">
+        <img class="img-header" src="{% static 'image/carrito.svg' %}" alt="Imagen navbar">
+      </a>
     </nav>
     {% block content %}
     {% endblock %}

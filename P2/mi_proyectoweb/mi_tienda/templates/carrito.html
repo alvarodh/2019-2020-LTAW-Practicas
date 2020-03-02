@@ -1,0 +1,7 @@
+{% extends "base.html"%}
+{% block content %}
+  {% load staticfiles %}
+  {% for prod in cart %}
+      <p>{{ prod }}</p>
+  {% endfor %}
+{% endblock %}

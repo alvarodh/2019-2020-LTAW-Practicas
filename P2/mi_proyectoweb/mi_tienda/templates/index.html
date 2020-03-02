@@ -4,7 +4,7 @@
   {% for prod in productos %}
       <br>
       <div style="width:50%;float:{% cycle 'left' 'right' %};text-align:center;">
-        <strong>{{ prod.name }}</strong> → Precio: {{ prod.price }} €/unidad
+        <strong>{{ prod.name|title }}</strong> → Precio: {{ prod.price }} €/unidad
         <br>
         <a href="{{ prod.prodpath }}">
           <img id="recurso" src="{% static prod.imgpath %}" alt="Imagen">

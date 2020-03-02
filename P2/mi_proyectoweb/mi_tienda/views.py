@@ -5,32 +5,41 @@ from django.template.loader import get_template
 from django.shortcuts import render
 from random import randint
 from mi_tienda.models import Producto, Pedido
+import json
 
 def index(request):
     return render(request, 'index.html', {'productos': Producto.objects.all()})
 
-def croissant_mantequilla(request):
-    return render(request, 'croissant-mantequilla.html',{})
+def producto(request, id):
+    prod = Producto.objects.filter(prodpath=id + '.html')[0]
+    return render(request, 'producto.html', {'prod': prod})
 
-def donut_azucar(request):
-    return render(request, 'donut-azucar.html',{})
+def add_to_cart(request, id):
+    try:
+        prodname = Producto.objects.filter(prodpath=id + '.html')[0].name
+    except:
+        prodname = ""
+    return render(request, 'pedido.html', {'prodname': prodname,
+                                           'register_form': False,
+                                           'action': 'recibido'})
 
-def donut_chocolate(request):
-    return render(request, 'donut-chocolate.html',{})
-
-def napolitana_3_chocolates(request):
-    return render(request, 'napolitana-3-chocolates.html',{})
-
-def palmera_hojaldre(request):
-    return render(request, 'palmera-hojaldre.html',{})
-
-def palmera_chocolate(request):
-    return render(request, 'palmera-chocolate.html',{})
-
-def pedido(request):
-    return render(request, 'pedido.html', {})
+def show_cart(request):
+    try:
+        name = request.POST['nombre']
+        cart =  Pedido.objects.filter(name=name)[0].cart
+        return render(request, 'carrito.html', {'cart': json.loads(cart)})
+    except:
+        return render(request, 'pedido.html', {'register_form': True,
+                                               'action': 'show-cart'})
 
 def recibido(request):
-    p1 = Pedido(nombre=request.POST['nombre'],producto=request.POST['producto'])
-    p1.save()
-    return render(request, 'recibido.html', {'nombre': request.POST['nombre'], 'producto': request.POST['producto']})
+    try:
+        cart = json.loads(Pedido.objects.filter(name=request.POST['nombre'])[0].cart)
+        cart.append(request.POST['producto'])
+        p = Pedido.objects.filter(name=request.POST['nombre'])[0]
+        p.cart = json.dumps(cart)
+        p.save()
+    except:
+        Pedido(name=request.POST['nombre'],cart=json.dumps([request.POST['producto']])).save()
+
+    return index(request)
