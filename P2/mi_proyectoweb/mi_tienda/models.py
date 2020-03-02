@@ -11,3 +11,12 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.name
+
+class Pedido(models.Model):
+    """Modelo de datos de mis productos"""
+
+    nombre = models.CharField(max_length=50)
+    producto = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nombre + ": " + self.producto

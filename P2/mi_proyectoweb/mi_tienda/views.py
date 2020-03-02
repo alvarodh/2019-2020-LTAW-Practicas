@@ -4,7 +4,7 @@ from django.template import Template, Context
 from django.template.loader import get_template
 from django.shortcuts import render
 from random import randint
-from mi_tienda.models import Producto
+from mi_tienda.models import Producto, Pedido
 
 def index(request):
     return render(request, 'index.html', {'productos': Producto.objects.all()})
@@ -26,3 +26,11 @@ def palmera_hojaldre(request):
 
 def palmera_chocolate(request):
     return render(request, 'palmera-chocolate.html',{})
+
+def pedido(request):
+    return render(request, 'pedido.html', {})
+
+def recibido(request):
+    p1 = Pedido(nombre=request.POST['nombre'],producto=request.POST['producto'])
+    p1.save()
+    return render(request, 'recibido.html', {'nombre': request.POST['nombre'], 'producto': request.POST['producto']})
