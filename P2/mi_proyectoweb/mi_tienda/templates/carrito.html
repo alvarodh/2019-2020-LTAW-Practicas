@@ -1,7 +1,10 @@
 {% extends "base.html"%}
 {% block content %}
   {% load staticfiles %}
-  {% for prod in cart %}
-      <p>{{ prod }}</p>
-  {% endfor %}
+  <div class="list">
+    <img class="img-list" src="{% static 'image/index.jpg' %}" alt="Imagen navbar">
+    <span id="header-list">SUPER-TIENDA</span>
+    {{ cart|unordered_list }}
+    <p>Total de la compra: {{ total }} €</p>
+  </div>
 {% endblock %}

@@ -2,14 +2,12 @@
 {% block content %}
   {% load staticfiles %}
   {% for prod in productos %}
+    <div style="width:33%;float:left;text-align:center;position:static;">
+      <a href="{{ prod.prodpath }}">
+        <img id="recurso" src="{% static prod.imgpath %}" alt="Imagen">
+      </a>
       <br>
-      <div style="width:50%;float:{% cycle 'left' 'right' %};text-align:center;">
-        <strong>{{ prod.name|title }}</strong> → Precio: {{ prod.price }} €/unidad
-        <br>
-        <a href="{{ prod.prodpath }}">
-          <img id="recurso" src="{% static prod.imgpath %}" alt="Imagen">
-        </a>
-        <br>
-      </div>
+      <strong>{{ prod.name|title }}</strong> → Precio: {{ prod.price }} €/unidad
+    </div>
   {% endfor %}
 {% endblock %}

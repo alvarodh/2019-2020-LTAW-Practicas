@@ -1,0 +1,8 @@
+{% extends "base.html"%}
+{% block content %}
+  {% load staticfiles %}
+  <p>
+    Lo siento, no tenemos suficiente stock de {{ prod.name }},
+    como maximo podria comprar {{ prod.stock }} unidades.
+  </p>
+{% endblock %}

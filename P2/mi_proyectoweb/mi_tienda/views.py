@@ -10,36 +10,54 @@ import json
 def index(request):
     return render(request, 'index.html', {'productos': Producto.objects.all()})
 
-def producto(request, id):
-    prod = Producto.objects.filter(prodpath=id + '.html')[0]
-    return render(request, 'producto.html', {'prod': prod})
+def producto(request, product):
+    p = Producto.objects.get(prodpath__startswith=product)
+    return render(request, 'producto.html', {'prod': p})
 
-def add_to_cart(request, id):
+def add_to_cart(request, product):
     try:
-        prodname = Producto.objects.filter(prodpath=id + '.html')[0].name
+        prodname = Producto.objects.get(prodpath__startswith=product).name
     except:
         prodname = ""
     return render(request, 'pedido.html', {'prodname': prodname,
                                            'register_form': False,
                                            'action': 'recibido'})
 
+def search_product(request):
+    try:
+        p = Producto.objects.get(name=request.POST['producto'])
+        return render(request, 'producto.html', {'prod': p})
+    except:
+        return render(request, 'producto.html', {})
+
 def show_cart(request):
     try:
-        name = request.POST['nombre']
-        cart =  Pedido.objects.filter(name=name)[0].cart
-        return render(request, 'carrito.html', {'cart': json.loads(cart)})
+        p = Pedido.objects.get(name=request.POST['nombre'])
+        return render(request, 'carrito.html', {'cart': json.loads(p.cart),
+                                                'total': p.total})
     except:
         return render(request, 'pedido.html', {'register_form': True,
                                                'action': 'show-cart'})
 
 def recibido(request):
     try:
-        cart = json.loads(Pedido.objects.filter(name=request.POST['nombre'])[0].cart)
-        cart.append(request.POST['producto'])
-        p = Pedido.objects.filter(name=request.POST['nombre'])[0]
-        p.cart = json.dumps(cart)
-        p.save()
+        p = Pedido.objects.get(name=request.POST['nombre'])
     except:
-        Pedido(name=request.POST['nombre'],cart=json.dumps([request.POST['producto']])).save()
-
-    return index(request)
+        p = Pedido(name=request.POST['nombre']);
+    cart = json.loads(p.cart)
+    c = request.POST['cantidad']
+    prod = Producto.objects.get(name=request.POST['producto'])
+    if prod.stock - int(c) >= 0:
+        if not request.POST['producto'] in cart:
+            cart.append(request.POST['producto'])
+            cart.append([int(c)])
+        else:
+            cart[cart.index(request.POST['producto'])+1][0] += int(c)
+        p.cart = json.dumps(cart)
+        p.total += prod.price * int(c)
+        prod.stock -= int(c)
+        p.save()
+        prod.save()
+        return index(request)
+    else:
+        return render(request, 'no-stock.html', {'prod': prod})

@@ -17,6 +17,7 @@ class Pedido(models.Model):
 
     name = models.CharField(max_length=50)
     cart = models.CharField(max_length=250,default="[]")
+    total = models.FloatField(default=0.0)
 
     def __str__(self):
         return self.name
