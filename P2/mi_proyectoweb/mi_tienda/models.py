@@ -16,6 +16,7 @@ class Pedido(models.Model):
     """Modelo de datos de mis productos"""
 
     name = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
     cart = models.CharField(max_length=250,default="[]")
     total = models.FloatField(default=0.0)
 

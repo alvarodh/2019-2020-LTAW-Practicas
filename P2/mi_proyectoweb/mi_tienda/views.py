@@ -1,9 +1,6 @@
 # -- Fichero mi_tienda/views.py
 from django.http import HttpResponse
-from django.template import Template, Context
-from django.template.loader import get_template
 from django.shortcuts import render
-from random import randint
 from mi_tienda.models import Producto, Pedido
 import json
 
@@ -33,7 +30,11 @@ def search_product(request):
 def show_cart(request):
     try:
         p = Pedido.objects.get(name=request.POST['nombre'])
-        return render(request, 'carrito.html', {'cart': json.loads(p.cart),
+        if json.loads(p.cart) != '[]':
+            cart = json.loads(p.cart)
+        else:
+            cart = ""
+        return render(request, 'carrito.html', {'cart': cart,
                                                 'total': p.total})
     except:
         return render(request, 'pedido.html', {'register_form': True,
@@ -61,3 +62,25 @@ def recibido(request):
         return index(request)
     else:
         return render(request, 'no-stock.html', {'prod': prod})
+
+def pay(request):
+    username = request.POST['username']
+    password = request.POST['contrasena']
+    print(password)
+    try:
+        p = Pedido.objects.get(name=username)
+        if password == Pedido.objects.get(name=username).password:
+            p.total = 0.0
+            p.cart = json.dumps("[]")
+            p.save()
+    except:
+        pass
+    return index(request)
+
+def register(request):
+    return render(request, 'registro.html', {})
+
+def add_client(request):
+    if not request.POST['name'] in Pedido.objects.all():
+        Pedido(name=request.POST['name'],password=request.POST['contrasena']).save()
+    return index(request)

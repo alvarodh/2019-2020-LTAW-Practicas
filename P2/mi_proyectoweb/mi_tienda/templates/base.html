@@ -12,6 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="{% static 'css/master.css' %}">
     <title>Súper-Tienda</title>
   </head>
@@ -21,16 +22,16 @@
         <img class="img-header" src="{% static 'image/index.jpg' %}" alt="Imagen navbar">
         <span id="header">SUPER-TIENDA</span>
       </a>
-      <div class="navbar-nav mx-auto">
-        <span class="nav-item dropdown">
-          <a class="nav-link" href="#" data-toggle="dropdown">
-            Opciones
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="show-cart">Consultar Carrito</a>
-            <a class="dropdown-item" href="p-add">Comprar</a>
-          </div>
-        </span>
+      <div class="dropdown">
+        <button class="btn btn-light btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Opciones
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="show-cart">Consultar Carrito</a>
+          <a class="dropdown-item" href="p-add">Comprar</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="register">Registrarse</a>
+        </div>
       </div>
       <form class="form-inline my-2 my-lg-0" method="post" action="search">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="producto">

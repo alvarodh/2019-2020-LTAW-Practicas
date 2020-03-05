@@ -30,13 +30,31 @@ body {
   font-family: monospace;
 }
 
+#container {
+  margin-top: 5%;
+  position: static;
+  padding: 10px;
+}
+
 .list {
   border: 1px solid black;
   font-size: 20px;
   width: 25%;
   margin-left: 25%;
-  padding: 10px;
-  margin-top: 10%;
+  text-align: left;
+}
+
+.pay-form {
+  float: right;
+  width: 20%;
+  margin-right: 5%;
+  text-align: left;
+  border: 3px solid blue;
+}
+
+.register-form {
+  width: 20%;
+  margin-left: 40%;
   text-align: left;
 }
 

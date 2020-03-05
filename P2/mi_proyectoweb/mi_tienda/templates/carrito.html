@@ -1,7 +1,27 @@
 {% extends "base.html"%}
 {% block content %}
   {% load staticfiles %}
-  <div class="list">
+  <div id="container" class="pay-form">
+    <form  action="pay" method="post">
+      {% csrf_token %}
+      <label>Nombre de usuario: </label>
+      <input type="text" name="username" value="" required/><br>
+      <label>Contraseña: </label>
+      <input type="password" name="contrasena" value="" required/><br>
+      <label>Nombre del titular: </label>
+      <input type="text" name="name" value="" required/><br>
+      <label>Apellido del titular: </label>
+      <input type="text" name="name" value="" required/><br>
+      <label>Numero de tarjeta: </label>
+      <input type="text" name="name" value="" required/><br>
+      <label>Fecha de caducidad: </label>
+      <input type="date" name="expires-date" value="" required/><br>
+      <label>PIN: </label>
+      <input type="password" name="PIN" value="" required/><br>
+      <input type="submit" value="Pagar" />
+    </form>
+  </div>
+  <div id="container" class="list">
     <img class="img-list" src="{% static 'image/index.jpg' %}" alt="Imagen navbar">
     <span id="header-list">SUPER-TIENDA</span>
     {{ cart|unordered_list }}
