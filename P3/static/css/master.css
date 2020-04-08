@@ -1,0 +1,72 @@
+@font-face {
+  src: url("ARCHER.TTF");
+  font-family: archer;
+}
+
+#header {
+  font-family: archer;
+  color: green;
+  font-size: 40px;
+}
+
+#img-user {
+  width: 2em;
+}
+
+.img-header {
+  width: 5em;
+}
+
+#header-list {
+  font-family: archer;
+  float: right;
+  position: static;
+  color: black;
+  font-size: 30px;
+}
+
+.img-list {
+  width: 4em;
+}
+
+body {
+  text-align: center;
+  font-family: monospace;
+}
+
+#container {
+  margin-top: 5%;
+  position: static;
+  padding: 10px;
+}
+
+.list {
+  border: 1px solid black;
+  font-size: 20px;
+  width: 25%;
+  margin-left: 25%;
+  text-align: left;
+}
+
+.pay-form {
+  float: right;
+  width: 20%;
+  margin-right: 5%;
+  text-align: left;
+  border: 3px solid blue;
+}
+
+.register-form {
+  width: 20%;
+  margin-left: 40%;
+  text-align: left;
+}
+
+li {
+  list-style: none;
+}
+
+#recurso {
+  width: 50%;
+  border: 2px solid black;
+}
