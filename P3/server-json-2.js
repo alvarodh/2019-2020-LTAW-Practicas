@@ -1,3 +1,4 @@
+///-- Modulos utilizados
 const http = require('http'),
       url = require('url'),
       fs = require('fs'),
@@ -5,7 +6,13 @@ const http = require('http'),
 
 let productos = ["FPGA-1", "RISC-V", "74ls00", "FPGA-2", "74ls01", "AVR", "Arduino-UNO"];
 
-http.createServer((req, res) => {
+function get_products(p) {
+
+
+  return prods;
+}
+
+const server = http.createServer((req, res) => {
   const q = url.parse(req.url, true);
   console.log("Petición: " + q.pathname);
   switch (q.pathname) {
@@ -13,27 +20,32 @@ http.createServer((req, res) => {
       fs.readFile("./index.html", (err, data) => {
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(data);
-        res.end();
-        return
+        return res.end();
       });
       break;
+    //-- Fichero js cliente
     case "/client-2.js":
       fs.readFile("./client-2.js", (err, data) => {
         res.writeHead(200, {'Content-Type': 'application/javascript'});
         res.write(data);
-        res.end();
-        return
+        return res.end();
       });
       break;
       case "/myquery":
-        params = q.query;
-        console.log(params.producto)
-        content = JSON.stringify(productos) + '\n';
+        const params = q.query;
+        console.log("Parametros: " + params.prod);
+        console.log(typeof(params.prod))
+        let prod_p = []
+        for (var i = 0; i < productos.length; i++) {
+          if (productos[i].toLowerCase().indexOf(params.prod.toLowerCase()) != -1 && params.prod.length > 0) {
+            prod_p.push(productos[i]);
+          }
+        }
+        content = JSON.stringify(prod_p);
         res.setHeader('Content-Type', 'application/json')
         res.write(content);
         res.end();
-        return
-        break
+        break;
     default:
       content = "Error";
       res.statusCode = 404;
@@ -41,9 +53,7 @@ http.createServer((req, res) => {
       res.write(content);
       res.end();
   }
-
-}).listen(PUERTO);
-
+}).listen(PUERTO)
 
 console.log("Servidor LISTO!")
 console.log("Escuchando en puerto: " + PUERTO)
