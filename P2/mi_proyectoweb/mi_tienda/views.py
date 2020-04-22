@@ -66,7 +66,6 @@ def recibido(request):
 def pay(request):
     username = request.POST['username']
     password = request.POST['contrasena']
-    print(password)
     try:
         p = Pedido.objects.get(name=username)
         if password == Pedido.objects.get(name=username).password:
