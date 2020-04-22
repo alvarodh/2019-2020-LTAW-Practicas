@@ -26,57 +26,22 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="/show_cart">Consultar Carrito</a>
+          <a class="dropdown-item" href="#">Comprar</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/register.html">Registrarse</a>
         </div>
       </div>
       <div class="form-inline my-2 my-lg-0">
-        <input id="ver" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="position:static;"/>
-        <ul id="resultado" class="list-group" data-toggle="dropdown"></ul>
+        <input id="ver" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+        <div style="position:relative;">
+          <ul id="resultado" class="list-group"></ul>
+        </div>
       </div>
     </nav>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/donut-de-chocolate.html">
-        <img id="recurso" src="/donuts-chocolate.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Donut de chocolate</strong> → Precio: 0.29 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/donut-de-azucar.html">
-        <img id="recurso" src="/donuts-azucar.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Donut de azucar</strong> → Precio: 0.17 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/palmera-de-chocolate.html">
-        <img id="recurso" src="/palmera-chocolate.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Palmera de chocolate</strong> → Precio: 0.37 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/palmera-de-hojaldre.html">
-        <img id="recurso" src="/palmera-hojaldre.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Palmera de hojaldre</strong> → Precio: 0.22 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/croissant-de-mantequilla.html">
-        <img id="recurso" src="/croissant-mantequilla.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Croissant mantequilla</strong> → Precio: 0.07 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/napolitana-de-3-chocolates.html">
-        <img id="recurso" src="/napolitana-3-chocolates.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Napolitana de 3 chocolates</strong> → Precio: 0.52 €/unidad
-    </div>
+    <label>Nombre: </label>
+    <input id="name" type="text" name="nombre" value=""/>
+    <button id="show" type="button" name="ver carrito">Mostrar carrito</button>
+    <div id="carrito"></div>
   </body>
-  <script src="/client-2.js"></script>
+  <script src="/client-cart.js"></script>
 </html>

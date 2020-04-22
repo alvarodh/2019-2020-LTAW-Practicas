@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/master.css">
+    <script src="/client-2.js"></script>
     <title>Súper-Tienda</title>
   </head>
   <body>
@@ -31,52 +32,19 @@
         </div>
       </div>
       <div class="form-inline my-2 my-lg-0">
-        <input id="ver" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="position:static;"/>
-        <ul id="resultado" class="list-group" data-toggle="dropdown"></ul>
+        <input id="ver" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+        <div style="position:relative;">
+          <ul id="resultado" class="list-group"></ul>
+        </div>
       </div>
     </nav>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/donut-de-chocolate.html">
-        <img id="recurso" src="/donuts-chocolate.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Donut de chocolate</strong> → Precio: 0.29 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/donut-de-azucar.html">
-        <img id="recurso" src="/donuts-azucar.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Donut de azucar</strong> → Precio: 0.17 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/palmera-de-chocolate.html">
-        <img id="recurso" src="/palmera-chocolate.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Palmera de chocolate</strong> → Precio: 0.37 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/palmera-de-hojaldre.html">
-        <img id="recurso" src="/palmera-hojaldre.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Palmera de hojaldre</strong> → Precio: 0.22 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/croissant-de-mantequilla.html">
-        <img id="recurso" src="/croissant-mantequilla.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Croissant mantequilla</strong> → Precio: 0.07 €/unidad
-    </div>
-    <div style="width:33%;float:left;text-align:center;position:static;">
-      <a href="/napolitana-de-3-chocolates.html">
-        <img id="recurso" src="/napolitana-3-chocolates.jpg" alt="Imagen">
-      </a>
-      <br>
-      <strong>Napolitana de 3 chocolates</strong> → Precio: 0.52 €/unidad
-    </div>
+    <img src="/napolitana-3-chocolates.jpg" alt=""/>
+    <form action="comprar" method="post">
+      <label>Nombre: </label>
+      <input type="text" name="name" value="" required/>
+      <input type="text" name="product" value="napolitana de 3 chocolates" readonly/>
+      <input type="submit" value="comprar">
+    </form>
+    <a href="/">Volver</a>
   </body>
-  <script src="/client-2.js"></script>
 </html>
