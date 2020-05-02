@@ -8,32 +8,37 @@ def index(request):
     return render(request, 'index.html', {'productos': Producto.objects.all()})
 
 def producto(request, product):
-    p = Producto.objects.get(prodpath__startswith=product)
+    try:
+        p = Producto.objects.get(name=product.replace('-',' '))
+    except:
+        p = ''
     return render(request, 'producto.html', {'prod': p})
 
 def add_to_cart(request, product):
     try:
         prodname = Producto.objects.get(prodpath__startswith=product).name
     except:
-        prodname = ""
+        prodname = ''
     return render(request, 'pedido.html', {'prodname': prodname,
                                            'register_form': False,
                                            'action': 'recibido'})
 
 def search_product(request):
     try:
-        p = Producto.objects.get(name=request.POST['producto'])
-        return render(request, 'producto.html', {'prod': p})
+        p = Producto.objects.filter(name__contains=request.POST['producto'])
+        return render(request, 'index.html', {'productos': p})
     except:
-        return render(request, 'producto.html', {})
+        return render(request, 'producto.html', {'productos': ''})
 
 def show_cart(request):
     try:
         p = Pedido.objects.get(name=request.POST['nombre'])
+        if p.password != request.POST['password']:
+            return render(request, 'ladronzuelo.html', {'username': p.name}) 
         if json.loads(p.cart) != '[]':
             cart = json.loads(p.cart)
         else:
-            cart = ""
+            cart = ''
         return render(request, 'carrito.html', {'cart': cart,
                                                 'total': p.total})
     except:
@@ -43,8 +48,10 @@ def show_cart(request):
 def recibido(request):
     try:
         p = Pedido.objects.get(name=request.POST['nombre'])
+        if request.POST['password'] != p.password:
+            return render(request, 'ladronzuelo.html', {'username': p.name})
     except:
-        p = Pedido(name=request.POST['nombre']);
+        return render(request, 'registro.html', {})
     cart = json.loads(p.cart)
     c = request.POST['cantidad']
     prod = Producto.objects.get(name=request.POST['producto'])
@@ -65,13 +72,11 @@ def recibido(request):
 
 def pay(request):
     username = request.POST['username']
-    password = request.POST['contrasena']
+    password = request.POST['password']
     try:
         p = Pedido.objects.get(name=username)
-        if password == Pedido.objects.get(name=username).password:
-            p.total = 0.0
-            p.cart = json.dumps("[]")
-            p.save()
+        if password == p.password:
+            p.delete()
     except:
         pass
     return index(request)
@@ -81,5 +86,5 @@ def register(request):
 
 def add_client(request):
     if not request.POST['name'] in Pedido.objects.all():
-        Pedido(name=request.POST['name'],password=request.POST['contrasena']).save()
+        Pedido(name=request.POST['name'],password=request.POST['password']).save()
     return index(request)

@@ -6,17 +6,19 @@
     <img src="{% static prod.imgpath %}" alt=""/>
     <form action="recibido" method="post">
       {% csrf_token %}
-      <label>Nombre de la persona que hace el pedido: </label>
+      <label>Nombre de usuario: </label>
       <input type="text" name="nombre" value="" required/>
+      <label>Contraseña: </label>
+      <input type="password" name="password" value="" required/>
       <label>Producto: </label>
       <input type="text" name="producto" value="{{ prod.name }}" readonly/>
       <label>Cantidad: </label>
-      <input type="text" name="cantidad" value="1" required/>
+      <input type="number" name="cantidad" value="1" required/>
       <input type="submit" value="Hacer pedido" />
     </form>
     <br>
     <p>¡Date prisa solo quedan {{ prod.stock }} unidades!</p>
   {% else %}
-    <p>No tenemos ese producto</p>
+    <p>No tenemos {{ prod.name }}, pero pronto tendremos más, ¡no seas impaciente!</p>
   {% endif %}
 {% endblock %}
