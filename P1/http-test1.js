@@ -30,6 +30,7 @@ http.createServer((req, res) => {
     case 'html':
       mime = 'text/' + extension;
       break;
+    case 'js':
     case 'json':
       mime = 'application/' + extension;
       break;

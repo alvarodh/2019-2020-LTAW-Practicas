@@ -2,80 +2,66 @@ const express = require('express'),
       app = express(),
       http = require('http').Server(app),
       io = require('socket.io')(http),
-      PORT = 8080,
-      commandList = ['/help','/list','/date','/hello'];
+      PORT = 8080;
 
-/*
-COMMANDS:
-  - /help: envia todos los comandos disponibles
-  - /list: numero de clientes conectados
-  - /date: envia fecha
-  - /hello: devuelve saludo
-*/
+var users = 0,
+    names = {};
 
-var users = 0;
-
-http.listen(PORT, function(){
-  console.log('server in: http://127.0.0.1:' + PORT);
+http.listen(PORT, () => {
+  console.log('server in: http://127.0.0.1:' + PORT + '/');
 });
 
 app.get('/', (req, res) => {
   let path = __dirname + '/chat.html';
   res.sendFile(path);
-  console.log("access to " + path);
+  console.log('access to ' + path);
 });
 
-// El resto de peticiones se interpretan como ficheros estáticos
-app.use('/', express.static(__dirname +'/'));
+app.use('/', express.static(__dirname + '/'));
 
-// COMUNICACION POR WEBSOCKETS
-// Evento: Nueva conexion recibida
-io.on('connection', function (socket){
+io.on('connection', (socket) => {
 
-  // Usuario conectado
-  console.log('new user, socket id: ' + socket.id);
-  users += 1;
+  socket.on('hello', (msg) => {
+    io.emit('msg','server: ' + msg + ' joins to the chat');
+    console.log('new user, socket id: ' + socket.id + ', name: ' + msg);
+    users += 1;
+    names[socket.id] = msg;
+    socket.emit('welcome', 'server: welcome, ' + msg + ' you\'re the user number ' + users.toString());
+  });
 
-  // Le damos la bienvenida a través del evento 'welcome'
-  socket.emit('welcome', "Welcome, you're the user number " + users.toString());
-
-  // Función de retrollamada de mensaje recibido del cliente
   socket.on('msg', (msg) => {
-    console.log("user with socket id " + socket.id + ': ' + msg);
-    // Enviar el mensaje a TODOS los clientes que estén conectados
-    io.emit('msg', msg);
+    console.log(names[socket.id] + ': ' + msg);
+    io.emit('msg', names[socket.id] + ': ' + msg);
   });
 
   socket.on('cmd', (msg) => {
-    console.log("user with socket id " + socket.id + ': ' + msg);
-    let cmd = "";
+    console.log('user with socket id ' + socket.id + ': ' + msg);
+    let cmd = '';
     switch (msg) {
       case '/help':
-        cmd += "'/help': show all commands <br> '/list': show number of user connected";
-        cmd += "<br> '/date': show date <br> '/hello': get a greeting from server";
+        cmd += '\'/help\': show all commands <br> \'/list\': show number of user connected';
+        cmd += '<br> \'/date\': show date <br> \'/hello\': get a greeting from server';
         break;
       case '/list':
-        cmd += users.toString() + " users connected, included you";
+        cmd += users.toString() + ' users connected, included you';
         break;
       case '/date':
         let date = new Date();
-        cmd += date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
+        cmd += date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear();
         break;
       case '/hello':
-        cmd = "Hola guapito, ¿más patatitas?"
+        cmd = 'gloria a gorzo'
         break;
       default:
-        cmd = "No command named '" + msg + "' try with '/help' to see all commands";
+        cmd = 'no command named \'' + msg + '\' try with \'/help\' to see all commands';
     }
-    // Enviar el mensaje a TODOS los clientes que estén conectados
-    if (cmd) {
-      socket.emit('msg', cmd);
-    }
+    socket.emit('msg', 'server: ' + cmd);
   });
 
-  // Usuario desconectado. Imprimir el identificador de su socket
-  socket.on('disconnect', function(){
-    console.log('user disconnect, socket id: ' + socket.id);
+  socket.on('disconnect', () => {
+    console.log(names[socket.id] + ' leaves the chat');
     users -= 1;
+    io.emit('msg', 'server: ' + names[socket.id] + ' leaves the chat');
+    delete names[socket.id];
   });
 });

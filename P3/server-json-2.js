@@ -8,16 +8,10 @@ let productos = ["croissant de mantequilla", "napolitana de 3 chocolates",
                  "donut de azucar", "donut de chocolate",
                  "palmera de chocolate", "palmera de hojaldre"];
 
-function get_products(p) {
-
-
-  return prods;
-}
-
 const server = http.createServer((req, res) => {
-  let q = url.parse(req.url, true);
-  let cookie = req.headers.cookie;
-  let params = q.query;
+  let q = url.parse(req.url, true),
+      cookie = req.headers.cookie,
+      params = q.query;
   console.log("Petición: " + q.pathname);
   switch (q.pathname) {
     case "/":
@@ -88,7 +82,7 @@ const server = http.createServer((req, res) => {
       break;
     case "/client-2.js":
     case "/client-cart.js":
-      fs.readFile("." + q.pathname, (err, data) => {
+      fs.readFile("./static/js" + q.pathname, (err, data) => {
         res.writeHead(200, {'Content-Type': 'application/javascript'});
         res.write(data);
         return res.end();
@@ -134,7 +128,7 @@ const server = http.createServer((req, res) => {
         return res.end();
       });
       break;
-    case "/show_cart":
+    case '/show_cart':
       fs.readFile("./layout/cart.html", (err, data) => {
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(data);

@@ -26,16 +26,13 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="/show_cart">Consultar Carrito</a>
-          <a class="dropdown-item" href="#">Comprar</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/register.html">Registrarse</a>
         </div>
       </div>
       <div class="form-inline my-2 my-lg-0">
-        <input id="ver" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-        <div style="position:relative;">
-          <ul id="resultado" class="list-group"></ul>
-        </div>
+        <input id="ver" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="position:static;"/>
+        <ul id="resultado" class="list-group" data-toggle="dropdown"></ul>
       </div>
     </nav>
     <label>Nombre: </label>

@@ -4,14 +4,21 @@
     <meta charset="utf-8">
     <title>SÚPER-CHAT</title>
     <link rel="shortcut icon" href="pollo.png">
+    <script src="jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js" defer></script>
   </head>
-  <body>
+  <body onload="init()">
     <h1>SÚPER-CHAT</h1>
-    <input id="msg" autocomplete="off" />
-    <button type="button" id="send">SEND</button>
-    <h3>Mensajes recibidos:</h3>
-    <p id="display"></p>
+    <div class="panel">
+      <input id="name" value=""/>
+      <button type="button" id="register">START CHATTING</button>
+    </div>
+    <div class="container">
+      <input id="msg" autocomplete="off"/>
+      <button type="button" id="send">SEND</button>
+      <h3>Mensajes recibidos:</h3>
+      <p id="display"></p>
+    </div>
   </body>
 </html>
