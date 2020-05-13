@@ -5,7 +5,10 @@ const express = require('express'),
       PORT = 8080;
 
 var users = 0,
-    names = {};
+    names = {},
+    days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    months = ['January', 'February', 'March', 'April', 'May', 'June',
+              'July', 'August', 'September', 'October', 'November', 'December'];
 
 http.listen(PORT, () => {
   console.log('server in: http://127.0.0.1:' + PORT + '/');
@@ -35,7 +38,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('cmd', (msg) => {
-    console.log('user with socket id ' + socket.id + ': ' + msg);
+    console.log('message from ' + names[socket.id] + ': ' + msg);
     let cmd = '';
     switch (msg) {
       case '/help':
@@ -47,10 +50,12 @@ io.on('connection', (socket) => {
         break;
       case '/date':
         let date = new Date();
-        cmd += date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear();
+        cmd += date.getDate() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear();
+        //cmd += 'Today is ' + days[date.getDay()] + ' ' + date.getDate() + ' of ' + months[date.getMonth()] + ' ' + date.getFullYear();
+        //cmd += date;
         break;
       case '/hello':
-        cmd = 'gloria a gorzo'
+        cmd = 'gloria a gorzo, ' + names[socket.id];
         break;
       default:
         cmd = 'no command named \'' + msg + '\' try with \'/help\' to see all commands';
