@@ -7,18 +7,18 @@
     <script src="jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js" defer></script>
+    <link rel="stylesheet" href="master.css">
   </head>
   <body onload="init()">
-    <h1>SÚPER-CHAT</h1>
+    <p id="title">SUPER-CHAT</p>
     <div class="panel">
       <input id="name" value=""/>
       <button type="button" id="register">START CHATTING</button>
     </div>
     <div class="container">
-      <input id="msg" autocomplete="off"/>
+      <div id="display-panel"><p id="display"></p></div>
       <button type="button" id="send">SEND</button>
-      <h3>Mensajes recibidos:</h3>
-      <p id="display"></p>
+      <input id="msg" autocomplete="off"/>
     </div>
   </body>
 </html>

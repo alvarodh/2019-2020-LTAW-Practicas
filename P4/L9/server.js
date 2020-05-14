@@ -50,8 +50,8 @@ io.on('connection', (socket) => {
         break;
       case '/date':
         let date = new Date();
-        cmd += date.getDate() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear();
-        //cmd += 'Today is ' + days[date.getDay()] + ' ' + date.getDate() + ' of ' + months[date.getMonth()] + ' ' + date.getFullYear();
+        //cmd += date.getDate() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear();
+        cmd += 'Today is ' + days[date.getDay()] + ' ' + date.getDate() + ' of ' + months[date.getMonth()] + ' ' + date.getFullYear();
         //cmd += date;
         break;
       case '/hello':
