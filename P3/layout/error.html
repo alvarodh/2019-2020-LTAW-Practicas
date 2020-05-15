@@ -31,17 +31,11 @@
         </div>
       </div>
       <div class="form-inline my-2 my-lg-0">
-        <input id="ver" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="position:static;"/>
+        <input id="ver" autocomplete="off" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="position:static;"/>
         <ul id="resultado" class="list-group" data-toggle="dropdown"></ul>
       </div>
     </nav>
-    <!-- FORMULARIO -->
-    <br>
-    <form action="/register_form" method="POST">
-      Nombre: <input type="text" name="name" autocomplete="off" required/><br/>
-      Password: <input type="password" name="password" autocomplete="off" required/><br/>
-      <input type="submit" value="Enviar"/>
-    </form>
-  </body>
+    <h3>Te has equivocado de contraseña, confiamos en que sea un error fortuito, no intentes comprar cosas que no son tuyas
+        que queda muy feo, <a href="show_cart">vuelve a intentarlo</a>.</h3>
   <script src="/client-2.js"></script>
 </html>

@@ -32,14 +32,13 @@
         </div>
       </div>
       <div class="form-inline my-2 my-lg-0">
-        <input id="ver" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="position:static;"/>
+        <input id="ver" autocomplete="off" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="position:static;"/>
         <ul id="resultado" class="list-group" data-toggle="dropdown"></ul>
       </div>
     </nav>
     <img src="/donuts-chocolate.jpg" alt=""/>
-    <form action="comprar" method="post">
-      <label>Nombre: </label>
-      <input type="text" name="name" value="" required/>
+    <form action="buy" method="post">
+      Nombre: <input type="text" name="name" value="" autocomplete="off" required/>
       <input type="text" name="product" value="donut de chocolate" readonly/>
       <input type="submit" value="comprar">
     </form>
