@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/master.css">
     <title>Súper-Tienda</title>
   </head>
-  <body>
+  <body onload="init()">
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="/">
         <img class="img-header" src="/index.jpg" alt="Imagen navbar">
@@ -25,7 +25,7 @@
           Opciones
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/show_cart">Consultar Carrito</a>
+          <a class="dropdown-item" href="/action.show_cart">Consultar Carrito</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/register.html">Registrarse</a>
         </div>
@@ -35,33 +35,81 @@
         <ul id="resultado" class="list-group" data-toggle="dropdown"></ul>
       </div>
     </nav>
-    Nombre: <input id="name" type="text" name="nombre" value="" autocomplete="off" required/>
-    <button id="show" type="button" name="ver carrito">Mostrar carrito</button>
     <br><br>
-    <div class="pay-form">
-      <form  action="pay" method="post">
-        <label>Nombre de usuario: </label>
-        <input type="text" name="username" value="" autocomplete="off" required/><br>
-        <label>Contraseña: </label>
-        <input type="password" name="password" value="" autocomplete="off" required/><br>
-        <label>Nombre del titular: </label>
-        <input type="text" name="name" value="" autocomplete="off" required/><br>
-        <label>Apellido del titular: </label>
-        <input type="text" name="last-name" value="" autocomplete="off" required/><br>
-        <label>Numero de tarjeta: </label>
-        <input type="text" name="card-num" value="" autocomplete="off" required/><br>
-        <label>Fecha de caducidad: </label>
-        <input type="date" name="expires-date" value="" autocomplete="off" required/><br>
-        <label>PIN: </label>
-        <input type="password" name="PIN" value="" autocomplete="off" required/><br>
-        <input type="submit" value="Pagar"/>
-      </form>
+    <div class="container-cart">
+      Nombre: <input id="name" type="text" name="nombre" value="" autocomplete="off" required/>
+      <button id="show" type="button" name="ver carrito">Mostrar carrito</button>
+      <br><br>
+      <div class="pay-form">
+        <form  action="action.pay" method="post">
+          <label>Nombre de usuario: </label>
+          <input type="text" name="username" value="" autocomplete="off" required/><br>
+          <label>Contraseña: </label>
+          <input type="password" name="password" value="" autocomplete="off" required/><br>
+          <label>Nombre del titular: </label>
+          <input type="text" name="name" value="" autocomplete="off" required/><br>
+          <label>Apellido del titular: </label>
+          <input type="text" name="last-name" value="" autocomplete="off" required/><br>
+          <label>Numero de tarjeta: </label>
+          <input type="text" name="card-num" value="" autocomplete="off" required/><br>
+          <label>Fecha de caducidad: </label>
+          <input type="date" name="expires-date" value="" autocomplete="off" required/><br>
+          <label>PIN: </label>
+          <input type="password" name="PIN" value="" autocomplete="off" required/><br>
+          <input type="submit" value="Pagar"/>
+        </form>
+      </div>
+      <div id="factura">
+        <img class="img-list" src="/index.jpg" alt="Imagen navbar">
+        <span id="header-list">SUPER-TIENDA</span><br><br>
+        <div id="cart"></div>
+      </div>
     </div>
-    <div id="factura">
-      <img class="img-list" src="/index.jpg" alt="Imagen navbar">
-      <span id="header-list">SUPER-TIENDA</span><br><br>
-      <div id="cart"></div>
+    <div class="container-prod">
+      <div id="donut-de-chocolate" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/donut-de-chocolate.html">
+          <img id="recurso" src="/donuts-chocolate.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Donut de chocolate</strong> → Precio: 0.25 €/unidad
+      </div>
+      <div id="donut-de-azucar" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/donut-de-azucar.html">
+          <img id="recurso" src="/donuts-azucar.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Donut de azucar</strong> → Precio: 0.25 €/unidad
+      </div>
+      <div id="palmera-de-chocolate" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/palmera-de-chocolate.html">
+          <img id="recurso" src="/palmera-chocolate.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Palmera de chocolate</strong> → Precio: 1.69 €/unidad
+      </div>
+      <div id="palmera-de-hojaldre" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/palmera-de-hojaldre.html">
+          <img id="recurso" src="/palmera-hojaldre.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Palmera de hojaldre</strong> → Precio: 2.25 €/unidad
+      </div>
+      <div id="croissant-de-mantequilla" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/croissant-de-mantequilla.html">
+          <img id="recurso" src="/croissant-mantequilla.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Croissant mantequilla</strong> → Precio: 0.29 €/unidad
+      </div>
+      <div id="napolitana-de-3-chocolates" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/napolitana-de-3-chocolates.html">
+          <img id="recurso" src="/napolitana-3-chocolates.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Napolitana de 3 chocolates</strong> → Precio: 1.00 €/unidad
+      </div>
     </div>
+    <script src="/client-cart.js"></script>
+    <script src="/jquery.min.js"></script>
   </body>
-  <script src="/client-cart.js"></script>
 </html>

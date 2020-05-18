@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/master.css">
     <title>Súper-Tienda</title>
   </head>
-  <body>
+  <body onload="init()">
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="/">
         <img class="img-header" src="/index.jpg" alt="Imagen navbar">
@@ -25,7 +25,7 @@
           Opciones
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/show_cart">Consultar Carrito</a>
+          <a class="dropdown-item" href="/action.show_cart">Consultar Carrito</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/register.html">Registrarse</a>
         </div>
@@ -36,6 +36,53 @@
       </div>
     </nav>
     <br><br>
-    <h3>¡Gracias por su compra! Esperamos que vuelva a confiar en nosotros.</h3>
+    <div class="container-prod">
+      <h4>¡Gracias por su compra! Esperamos que vuelva a confiar en nosotros, <a href="/">seguir comprando</a>.</h4>
+    </div>
+    <div class="container-all">
+      <div id="donut-de-chocolate" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/donut-de-chocolate.html">
+          <img id="recurso" src="/donuts-chocolate.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Donut de chocolate</strong> → Precio: 0.25 €/unidad
+      </div>
+      <div id="donut-de-azucar" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/donut-de-azucar.html">
+          <img id="recurso" src="/donuts-azucar.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Donut de azucar</strong> → Precio: 0.25 €/unidad
+      </div>
+      <div id="palmera-de-chocolate" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/palmera-de-chocolate.html">
+          <img id="recurso" src="/palmera-chocolate.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Palmera de chocolate</strong> → Precio: 1.69 €/unidad
+      </div>
+      <div id="palmera-de-hojaldre" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/palmera-de-hojaldre.html">
+          <img id="recurso" src="/palmera-hojaldre.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Palmera de hojaldre</strong> → Precio: 2.25 €/unidad
+      </div>
+      <div id="croissant-de-mantequilla" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/croissant-de-mantequilla.html">
+          <img id="recurso" src="/croissant-mantequilla.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Croissant mantequilla</strong> → Precio: 0.29 €/unidad
+      </div>
+      <div id="napolitana-de-3-chocolates" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/napolitana-de-3-chocolates.html">
+          <img id="recurso" src="/napolitana-3-chocolates.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Napolitana de 3 chocolates</strong> → Precio: 1.00 €/unidad
+      </div>
+    </div>
   <script src="/client-2.js"></script>
+  <script src="/jquery.min.js"></script>
 </html>

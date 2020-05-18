@@ -1,16 +1,18 @@
-///-- Modulos utilizados
+// Modulos utilizados
 const http = require('http'),
       url = require('url'),
       fs = require('fs'),
       PUERTO = 8000
 
 // BASES DE DATOS, A LO CUTRE
+    // productos y precios
 let productos = {"croissant de mantequilla": 0.29,
                  "napolitana de 3 chocolates": 1.00,
                  "donut de azucar": 0.25,
                  "donut de chocolate": 0.25,
                  "palmera de chocolate": 1.69,
                  "palmera de hojaldre": 2.25},
+    // ejemplo de cookie vacia
     user_template = {"password": "",
                      "cart":{
                        "croissant de mantequilla": 0,
@@ -27,15 +29,21 @@ const server = http.createServer((req, res) => {
       cookie = req.headers.cookie,
       params = q.query,
       filename = "",
-      mime = ""
+      mime = "",
+      ext = "",
+      prod_search = [],
+      prod_show = []
+  if (q.pathname != "/") {
+    ext = q.pathname.split('.')[q.pathname.split('.').length - 1].toLowerCase()
+  }
 
-  switch (q.pathname) {
-    case "/":
+  switch (ext) {
+    case "":
       filename = "./layout/index.html"
       mime = 'text/html'
       code = 200
       break
-    case "/register_form":
+    case "register_form":
       if (req.method == "POST") {
         req.on('data', chunk => {
           data = chunk.toString()
@@ -44,6 +52,8 @@ const server = http.createServer((req, res) => {
               cname = "",
               name = data.split('&')[0].split('=')[1]
           if (cookie) {
+            // si existen cookies anteriores comprobamos si el usuario ya esta
+            // registrado
             for (var i = 0; i < cookie.split('; ').length; i++) {
               cname = cookie.split('; ')[i].split('=')[0]
               if (cname == name) {
@@ -53,6 +63,7 @@ const server = http.createServer((req, res) => {
             }
           }
           if (new_user) {
+            // si el usuario no estaba registrado, se le crea una nueva cookie
             user = user_template
             user.password = data.split('&')[1].split('=')[1]
             res.setHeader('Set-Cookie', name + "=" + JSON.stringify(user))
@@ -60,12 +71,10 @@ const server = http.createServer((req, res) => {
           return
         })
       }
-      registered = true
       filename = "./layout/index.html"
       mime = 'text/html'
-      code = 200
       break
-    case "/cart": // PETICION GET: http://localhost:PORT/cart?user=NOMBRE
+    case "cart": // PETICION GET: http://localhost:PORT/action.cart?user=NOMBRE
       let cname = ""
       for (var i = 0; i < cookie.split('; ').length; i++) {
         cname = cookie.split('; ')[i].split('=')[0]
@@ -78,7 +87,7 @@ const server = http.createServer((req, res) => {
         }
       }
       break
-    case "/pay":
+    case "pay":
       if (req.method == "POST") {
         req.on('data', chunk => {
           data = chunk.toString()
@@ -113,7 +122,7 @@ const server = http.createServer((req, res) => {
         })
       }
       break
-    case "/buy":
+    case "buy":
       if (req.method == "POST") {
         req.on('data', chunk => {
           let data = chunk.toString(),
@@ -154,77 +163,60 @@ const server = http.createServer((req, res) => {
         })
       }
       break
-    case "/client-2.js":
-    case "/client-cart.js":
-    case "/jquery.min.js":
+    case "js":
       filename = "./static/js" + q.pathname
       mime = 'application/javascript'
-      code = 200
       break;
-    case "/croissant-de-mantequilla.html":
-    case "/napolitana-de-3-chocolates.html":
-    case "/donut-de-chocolate.html":
-    case "/donut-de-azucar.html":
-    case "/palmera-de-chocolate.html":
-    case "/palmera-de-hojaldre.html":
-    case "/register.html":
+    case "html":
       filename = "./layout" + q.pathname
       mime = 'text/html'
-      code = 200
       break
-    case "/searchbar": // PETICION GET: http://localhost:PORT/searchbar?prod=PRODUCTO
-      let prod_p = []
+    case "searchbar": // PETICION GET: http://localhost:PORT/action.searchbar?prod=PRODUCTO
+    case "showsearch": // PETICION GET: http://localhost:PORT/action.showsearch?prod=PRODUCTO
       for (let prod in productos) {
-        if (prod.toLowerCase().indexOf(params.prod.toLowerCase()) != -1 && params.prod.length > 0) {
-          prod_p.push(prod)
+        if (params.prod.length > 0) {
+          if (prod.toLowerCase().indexOf(params.prod.toLowerCase()) == -1) {
+            prod_show.push(prod)
+          } else {
+            prod_search.push(prod)
+          }
         }
       }
-      content = JSON.stringify(prod_p);
+      content = (ext == 'showsearch') ? JSON.stringify(prod_show) : JSON.stringify(prod_search)
       res.setHeader('Content-Type', 'application/json')
       res.write(content)
       res.end()
-      break;
-    case "/croissant-mantequilla.jpg":
-    case "/napolitana-3-chocolates.jpg":
-    case "/donuts-chocolate.jpg":
-    case "/donuts-azucar.jpg":
-    case "/palmera-chocolate.jpg":
-    case "/palmera-hojaldre.jpg":
-    case "/index.jpg":
-    case "/favicon.ico":
+      break
+    case "jpg":
+    case "png":
+    case "ico":
       filename = "./static/image" + q.pathname
-      mime = 'image/' + q.pathname.split('.')[1]
-      code = 200
+      mime = 'image/' + ext
       break;
-    case '/show_cart':
+    case 'show_cart':
       filename = "./layout/cart.html"
       mime = 'text/html'
-      code = 200
       break;
-    case '/master.css':
+    case 'css':
       filename = "./static/css" + q.pathname
       mime = 'text/css'
-      code = 200
       break;
-    case '/ARCHER.TTF':
+    case 'ttf':
       filename = "./static/css" + q.pathname
       mime = 'font/ttf'
-      code = 200
       break;
     default:
       //
   }
-  console.log("petition: " + q.pathname)
-  if (q.pathname != "/cart" && q.pathname != "/searchbar" && q.pathname != "/buy" && q.pathname != "/pay") {
-    console.log("filename: " + filename)
-    console.log("mime: " + mime + '\n\n')
+  console.log("request: " + q.pathname + '\n\n')
+  if (q.pathname.toLowerCase().indexOf('action.') == -1 || q.pathname.toLowerCase().indexOf('show_cart') != -1) {
     fs.readFile(filename, (err, data) => {
       if (err) {
         res.writeHead(404, {'Content-Type': 'text/html'})
         res.write("<h1>Error 404: File not Found</h1>")
         return res.end()
       } else {
-        res.writeHead(code, {'Content-Type': mime})
+        res.writeHead(200, {'Content-Type': mime})
         res.write(data)
         return res.end()
       }

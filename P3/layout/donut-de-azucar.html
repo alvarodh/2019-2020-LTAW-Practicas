@@ -12,10 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/master.css">
-    <script src="/client-2.js"></script>
     <title>Súper-Tienda</title>
   </head>
-  <body>
+  <body onload="init()">
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="/">
         <img class="img-header" src="/index.jpg" alt="Imagen navbar">
@@ -26,7 +25,7 @@
           Opciones
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/show_cart">Consultar Carrito</a>
+          <a class="dropdown-item" href="/action.show_cart">Consultar Carrito</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/register.html">Registrarse</a>
         </div>
@@ -36,12 +35,60 @@
         <ul id="resultado" class="list-group" data-toggle="dropdown"></ul>
       </div>
     </nav>
-    <img src="/donuts-azucar.jpg" alt=""/>
-    <form action="buy" method="post">
-      Nombre: <input type="text" name="name" value="" autocomplete="off" required/>
-      <input type="text" name="product" value="donut de azucar" readonly/>
-      <input type="submit" value="comprar">
-    </form>
-    <a href="/">Volver</a>
+    <br><br>
+    <div class="container-prod">
+      <img src="/donuts-azucar.jpg" alt=""/>
+      <form action="action.buy" method="post">
+        Nombre: <input type="text" name="name" value="" autocomplete="off" required/>
+        <input type="text" name="product" value="donut de azucar" readonly/>
+        <input type="submit" value="comprar">
+      </form>
+    </div>
+    <div class="container-all">
+      <div id="donut-de-chocolate" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/donut-de-chocolate.html">
+          <img id="recurso" src="/donuts-chocolate.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Donut de chocolate</strong> → Precio: 0.25 €/unidad
+      </div>
+      <div id="donut-de-azucar" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/donut-de-azucar.html">
+          <img id="recurso" src="/donuts-azucar.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Donut de azucar</strong> → Precio: 0.25 €/unidad
+      </div>
+      <div id="palmera-de-chocolate" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/palmera-de-chocolate.html">
+          <img id="recurso" src="/palmera-chocolate.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Palmera de chocolate</strong> → Precio: 1.69 €/unidad
+      </div>
+      <div id="palmera-de-hojaldre" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/palmera-de-hojaldre.html">
+          <img id="recurso" src="/palmera-hojaldre.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Palmera de hojaldre</strong> → Precio: 2.25 €/unidad
+      </div>
+      <div id="croissant-de-mantequilla" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/croissant-de-mantequilla.html">
+          <img id="recurso" src="/croissant-mantequilla.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Croissant mantequilla</strong> → Precio: 0.29 €/unidad
+      </div>
+      <div id="napolitana-de-3-chocolates" class="producto" style="width:33%;float:left;text-align:center;position:static;">
+        <a href="/napolitana-de-3-chocolates.html">
+          <img id="recurso" src="/napolitana-3-chocolates.jpg" alt="Imagen">
+        </a>
+        <br>
+        <strong>Napolitana de 3 chocolates</strong> → Precio: 1.00 €/unidad
+      </div>
+    </div>
+    <script src="/client-2.js"></script>
+    <script src="/jquery.min.js"></script>
   </body>
 </html>
