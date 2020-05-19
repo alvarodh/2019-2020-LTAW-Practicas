@@ -42,8 +42,9 @@ io.on('connection', (socket) => {
     let cmd = '';
     switch (msg) {
       case '/help':
-        cmd += '\'/help\': show all commands <br> \'/list\': show number of user connected';
+        cmd += '\'/help\': show all commands <br> \'/list\': show number of connected users';
         cmd += '<br> \'/date\': show date <br> \'/hello\': get a greeting from server';
+        cmd += '<br>\'/user-list\': show names of connected users'
         break;
       case '/list':
         cmd += users.toString() + ' users connected, included you';
@@ -56,6 +57,11 @@ io.on('connection', (socket) => {
         break;
       case '/hello':
         cmd = 'gloria a gorzo, ' + names[socket.id];
+        break;
+      case '/user-list':
+        for (let id in names) {
+          cmd += names[id] + ' '
+        }
         break;
       default:
         cmd = 'no command named \'' + msg + '\' try with \'/help\' to see all commands';
