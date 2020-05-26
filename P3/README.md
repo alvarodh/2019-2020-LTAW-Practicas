@@ -21,4 +21,11 @@ La interfaz de la web es algo más compleja que la de la Práctica 1, ya que se
 basa en la interfaz de la Práctica 2.
 
 La funcionalidad es la misma que la de la Práctica 2, desde ejercer las compras
-hasta pagar y consultar la compra.
+hasta pagar y consultar la compra, con la excepción de que en ésta se puede
+escoger la forma de pago entre tres posibilidades:
+
+  1. Visa
+
+  2. Pay-Pal
+
+  3. Transferencia bancaria
