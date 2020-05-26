@@ -17,6 +17,11 @@
   width: 5em;
 }
 
+.pay-method {
+  float: left;
+  display: block;
+}
+
 #header-list {
   font-family: archer;
   float: right;

@@ -41,22 +41,16 @@
       <button id="show" type="button" name="ver carrito">Mostrar carrito</button>
       <br><br>
       <div class="pay-form">
+        <button class="pay-method" id="tarjeta" type="button" name="tarjeta">VISA</button>
+        <button class="pay-method" id="paypal" type="button" name="paypal">PAY-PAL</button>
+        <button class="pay-method" id="trans" type="button" name="transferencia">TRANSFERENCIA</button>
+        <br><br>
         <form  action="action.pay" method="post">
           <label>Nombre de usuario: </label>
           <input type="text" name="username" value="" autocomplete="off" required/><br>
           <label>Contraseña: </label>
           <input type="password" name="password" value="" autocomplete="off" required/><br>
-          <label>Nombre del titular: </label>
-          <input type="text" name="name" value="" autocomplete="off" required/><br>
-          <label>Apellido del titular: </label>
-          <input type="text" name="last-name" value="" autocomplete="off" required/><br>
-          <label>Numero de tarjeta: </label>
-          <input type="text" name="card-num" value="" autocomplete="off" required/><br>
-          <label>Fecha de caducidad: </label>
-          <input type="date" name="expires-date" value="" autocomplete="off" required/><br>
-          <label>PIN: </label>
-          <input type="password" name="PIN" value="" autocomplete="off" required/><br>
-          <input type="submit" value="Pagar"/>
+          <span id="pay-data"></span>
         </form>
       </div>
       <div id="factura">

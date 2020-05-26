@@ -1,6 +1,10 @@
 const cart = document.getElementById('cart'),
       name = document.getElementById('name'),
       button = document.getElementById('show'),
+      visa = document.getElementById('tarjeta'),
+      paypal = document.getElementById('paypal'),
+      trans = document.getElementById('trans'),
+      paydata = document.getElementById('pay-data'),
       ver = document.getElementById('ver'),
       resultado = document.getElementById('resultado'),
       PORT = 8000
@@ -14,6 +18,43 @@ function init() {
   });
 }
 
+visa.onclick = () => {
+  paydata.innerHTML = "<label>Nombre del titular: </label> \
+                      <input type=\"text\" name=\"name\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <label>Apellido del titular: </label> \
+                      <input type=\"text\" name=\"last-name\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <label>Numero de tarjeta: </label> \
+                      <input type=\"text\" name=\"card-num\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <label>Fecha de caducidad: </label> \
+                      <input type=\"date\" name=\"expires-date\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <label>Numero de firma: </label> \
+                      <input type=\"password\" name=\"firma\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <label>PIN: </label> \
+                      <input type=\"password\" name=\"PIN\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <input type=\"submit\" value=\"Pagar\"/>"
+}
+
+paypal.onclick = () => {
+  paydata.innerHTML = "<label>Correo: </label> \
+                      <input type=\"email\" name=\"email\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <label>Contraseña: </label> \
+                      <input type=\"password\" name=\"email-pwd\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <input type=\"submit\" value=\"Pagar\"/>"
+}
+
+trans.onclick = () => {
+  paydata.innerHTML = "<label>Nombre del titular: </label> \
+                      <input type=\"text\" name=\"name\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <label>Apellido del titular: </label> \
+                      <input type=\"text\" name=\"last-name\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <label>Numero de cuenta: </label> \
+                      <input type=\"text\" name=\"card-num\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <label>PIN: </label> \
+                      <input type=\"password\" name=\"PIN\" value=\"\" autocomplete=\"off\" required/><br> \
+                      <input type=\"submit\" value=\"Pagar\"/>"
+}
+
+
 show.onclick = () => {
   const m = new XMLHttpRequest();
   cart.innerHTML = ""
@@ -21,9 +62,9 @@ show.onclick = () => {
      if (m.readyState == 4 && m.status == 200) {
        let productos = JSON.parse(m.responseText)
        $(document).ready(function () {
-         $('.pay-form').show()
          $('#factura').show()
          $('.container-cart').show()
+         $('.pay-form').show()
        });
        cart.innerHTML = ""
        for (let i in productos) {
