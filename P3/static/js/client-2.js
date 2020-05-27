@@ -53,7 +53,7 @@ ver.onkeydown = (ev) => {
          m.send()
          ver.value = ""
       }
-      break;
+      break
     default:
       //
   }

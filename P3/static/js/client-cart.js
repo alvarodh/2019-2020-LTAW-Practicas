@@ -7,6 +7,7 @@ const cart = document.getElementById('cart'),
       paydata = document.getElementById('pay-data'),
       ver = document.getElementById('ver'),
       resultado = document.getElementById('resultado'),
+      notregistered = document.getElementById('not-registered'),
       PORT = 8000
 
 function init() {
@@ -15,7 +16,8 @@ function init() {
     $('.pay-form').hide()
     $('#factura').hide()
     $('.container-cart').show()
-  });
+    $('#not-registered').hide()
+  })
 }
 
 visa.onclick = () => {
@@ -29,8 +31,6 @@ visa.onclick = () => {
                       <input type=\"date\" name=\"expires-date\" value=\"\" autocomplete=\"off\" required/><br> \
                       <label>Numero de firma: </label> \
                       <input type=\"password\" name=\"firma\" value=\"\" autocomplete=\"off\" required/><br> \
-                      <label>PIN: </label> \
-                      <input type=\"password\" name=\"PIN\" value=\"\" autocomplete=\"off\" required/><br> \
                       <input type=\"submit\" value=\"Pagar\"/>"
 }
 
@@ -57,24 +57,33 @@ trans.onclick = () => {
 
 show.onclick = () => {
   const m = new XMLHttpRequest();
-  cart.innerHTML = ""
   m.onreadystatechange = function() {
      if (m.readyState == 4 && m.status == 200) {
-       let productos = JSON.parse(m.responseText)
-       $(document).ready(function () {
-         $('#factura').show()
-         $('.container-cart').show()
-         $('.pay-form').show()
-       });
-       cart.innerHTML = ""
-       for (let i in productos) {
-           if (i != "total") {
-             if (productos[i] > 0) {
-               cart.innerHTML += i + " x" + productos[i].toString() + " unidad/es<br>"
+       if (m.responseText) {
+         let productos = JSON.parse(m.responseText)
+         $(document).ready(function () {
+           $('#factura').show()
+           $('.container-cart').show()
+           $('.pay-form').show()
+           $('#not-registered').hide()
+         })
+         cart.innerHTML = ""
+         for (let i in productos) {
+             if (i != "total") {
+               if (productos[i] > 0) {
+                 cart.innerHTML += i + " x" + productos[i].toString() + " unidad/es<br>"
+               }
+             } else {
+               cart.innerHTML += "<br>" + i + ": " + productos[i].toString() + " €"
              }
-           } else {
-             cart.innerHTML += "<br>" + i + ": " + productos[i].toString() + " €"
-           }
+         }
+       } else {
+         $(document).ready(function () {
+           $('#factura').hide()
+           $('.pay-form').hide()
+           $('#not-registered').show()
+         })
+         notregistered.innerHTML = "El usuario " + name.value + " no está registrado, si desea registrarse, <a href=\"/register.html\">pulse aquí</a>."
        }
      }
    }
@@ -88,7 +97,7 @@ ver.onkeyup = () => {
     m.onreadystatechange = function() {
        if (m.readyState == 4 && m.status == 200) {
          let productos = JSON.parse(m.responseText);
-         resultado.innerHTML = "";
+         resultado.innerHTML = ""
          for (let i = 0; i < productos.length; i++) {
            resultado.innerHTML += "<li class=\"list-group-item\">" + productos[i] + "</li>"
          }
@@ -97,7 +106,7 @@ ver.onkeyup = () => {
      m.open("GET","http://localhost:" + PORT.toString() + "/action.searchbar?prod=" + ver.value, true);
      m.send();
   } else {
-    resultado.innerHTML = "";
+    resultado.innerHTML = ""
   }
 }
 
@@ -115,12 +124,12 @@ ver.onkeydown = (ev) => {
              $(document).ready(function () {
                $('.container-prod').show()
                $('.container-cart').hide()
-               $('.producto').show();
+               $('.producto').show()
              });
              resultado.innerHTML = ""
              $(document).ready(function () {
                for (let i = 0; i < productos.length; i++) {
-                 $('#' + productos[i].replace(/[ ]/gi,'-')).hide();
+                 $('#' + productos[i].replace(/[ ]/gi,'-')).hide()
                }
              });
            }

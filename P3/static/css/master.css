@@ -20,6 +20,15 @@
 .pay-method {
   float: left;
   display: block;
+  height: 2.5em;
+  margin-bottom: 5%;
+  margin-right: 2%;
+  background-color: white;
+  border: 1px solid blue;
+}
+
+.pay-img {
+  height: 100%;
 }
 
 #header-list {
