@@ -10,15 +10,23 @@
     <link rel="stylesheet" href="master.css">
   </head>
   <body onload="init()">
-    <p id="title">SUPER-CHAT</p>
-    <div class="panel">
-      <input id="name" value=""/>
+    <div id="title">
+      SUPER-CHAT
+    </div>
+    <div id="register-panel">
+      <input id="name" value="" placeholder="Nick" autocomplete="off"/>
       <button type="button" id="register">START CHATTING</button>
     </div>
+    <p id="line"></p>
     <div class="container">
-      <div id="display-panel"><p id="display"></p></div>
-      <button type="button" id="send">SEND</button>
-      <input id="msg" autocomplete="off"/>
+      <div id="received">
+        <br>
+        <p id="display"></p>
+      </div>
+      <div id="send-mess">
+        <input id="msg" autocomplete="off"/>
+        <button type="button" id="send">SEND</button>
+      </div>
     </div>
   </body>
 </html>

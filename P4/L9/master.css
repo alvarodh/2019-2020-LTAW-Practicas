@@ -1,40 +1,75 @@
 @font-face {
-  src: url("ARCHER.TTF");
-  font-family: archer;
+  src: url("KidGames.ttf");
+  font-family: KidGames;
 }
 
 body {
-  font-family: archer;
   text-align: center;
-}
-
-.container {
-  font-family: monospace;
-  width: 100%;
-  height: 50%;
-  text-align: center;
-}
-
-#display-panel {
-  float: left;
-  margin-left: 15%;
-  text-align: left;
-}
-
-#display, #msg, #send {
-  font-size: 125%;
-  font-family: inherit;
+  background-color: gray;
 }
 
 #title {
+  font-family: KidGames;
   font-size: 500%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
 }
 
-#msg, #send {
-  float: right
+#line {
+  font-family: monospace;
+  font-size: 150%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  float: left;
+}
+
+#received {
+  background-color: black;
+  font-family: monospace;
+  color: white;
+  margin-left: 12.5%;
+  font-size: 100%;
+  overflow-y: scroll;
+  width: 75%;
+  height: 50%;
+  text-align: left;
+  border: 2px solid black;
+  display: block;
+  position: absolute;
+}
+
+#send-mess {
+  margin-left: 12.5%;
+  margin-top: 30%;
+  width: 75%;
+  height: 50%;
+  display: block;
+  position: absolute;
+}
+
+#name, #register, #msg, #send {
+  font-family: monospace;
+}
+
+#name, #register {
+  font-size: 150%;
+}
+
+#msg {
+  width: 94%;
+  height: 5%;
+  float: left;
 }
 
 #send {
-  margin-right: 15%;
-  border-radius: 150px;
+  width: 5%;
+  height: 6%;
+}
+
+#display {
+  margin-left: 5%;
 }
