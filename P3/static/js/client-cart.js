@@ -1,6 +1,6 @@
 const cart = document.getElementById('cart'),
       name = document.getElementById('name'),
-      button = document.getElementById('show'),
+      show = document.getElementById('show'),
       visa = document.getElementById('tarjeta'),
       paypal = document.getElementById('paypal'),
       trans = document.getElementById('trans'),
