@@ -18,6 +18,18 @@ register.onclick = () => {
   }
 }
 
+name.onkeydown = (ev) => {
+  switch (ev.keyCode) {
+    case 13: // enter
+      if (name.value) {
+        socket.emit('hello', name.value)
+      }
+      break;
+    default:
+      //
+  }
+}
+
 socket.on('used', (msg) => {
   line.innerHTML = msg
 })
