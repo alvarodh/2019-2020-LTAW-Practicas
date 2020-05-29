@@ -45,6 +45,7 @@ const server = http.createServer((req, res) => {
       ext = '',
       prod_search = [],
       prod_show = []
+
   if (q.pathname != '/') {
     ext = q.pathname.split('.')[q.pathname.split('.').length - 1].toLowerCase()
   }
@@ -98,7 +99,6 @@ const server = http.createServer((req, res) => {
         }
       }
       if (!sent) {
-        console.log('xdxdxd')
         content = ''
       }
       res.setHeader('Content-Type', 'application/json')

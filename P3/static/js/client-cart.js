@@ -99,7 +99,8 @@ ver.onkeyup = () => {
          let productos = JSON.parse(m.responseText);
          resultado.innerHTML = ""
          for (let i = 0; i < productos.length; i++) {
-           resultado.innerHTML += "<li class=\"list-group-item\">" + productos[i] + "</li>"
+           let url = productos[i].replace(/[ ]/gi,'-') + '.html'
+           resultado.innerHTML += "<li class=\"list-group-item\" onclick=\"location.href='" + url + "'\">" + productos[i] + "</li>"
          }
        }
      }
