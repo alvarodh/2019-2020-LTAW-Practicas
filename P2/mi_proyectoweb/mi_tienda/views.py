@@ -77,9 +77,11 @@ def pay(request):
         p = Pedido.objects.get(name=username)
         if password == p.password:
             p.delete()
+            return index(request)
+        else:
+            return render(request, 'ladronzuelo.html', {'username': username})
     except:
-        pass
-    return index(request)
+        return index(request)
 
 def register(request):
     return render(request, 'registro.html', {})
